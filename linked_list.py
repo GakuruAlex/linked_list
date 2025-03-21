@@ -10,8 +10,10 @@ class LinkedList:
     def __repr__(self):
             return self.__str__()
     class Node():
-        def __init__(self, data):
+        def __init__(self, linked_list, data):
             self._next = None
+            if linked_list.size == 0:
+                linked_list.head = self
             self.data = data
             LinkedList.size +=1
         @property
@@ -27,13 +29,16 @@ class LinkedList:
             return self.__str__()
 def main()-> None:
     linked_list = LinkedList()
-    node_1 = linked_list.Node(2)
-    node_2 = linked_list.Node(4)
-    node_3 = linked_list.Node(5)
+    print(len(linked_list))
+    node_1 = LinkedList.Node(linked_list, 2)
+    node_2 = LinkedList.Node(linked_list, 4)
+    print(len(linked_list))
+    node_3 = LinkedList.Node(linked_list, 5)
     node_1.next = node_2
     node_2.next = node_3
-    node_4 = linked_list.Node(7)
+    node_4 = LinkedList.Node(linked_list, 7)
     node_3.next = node_4
+    print(linked_list)
     print(len(linked_list))
 
 if __name__ =="__main__":
