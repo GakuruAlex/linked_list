@@ -12,6 +12,7 @@ class LinkedList:
     class Node():
         def __init__(self, linked_list, data):
             self._next = None
+            self.linked_list = linked_list
             if linked_list.size == 0:
                 linked_list.head = self
             self.data = data
@@ -21,8 +22,13 @@ class LinkedList:
             return self._next
         @next.setter
         def next(self, node_a):
-                self._next = node_a
-                LinkedList.tail = node_a
+                if self._next == None:
+                    self.linked_list.tail = node_a
+                    self._next = node_a
+                else:
+                    next_node = self._next
+                    self._next = node_a
+                    node_a._next =  next_node
         def __str__(self):
             return f"{self.data}"
         def __repr__(self):
@@ -38,6 +44,8 @@ def main()-> None:
     node_2.next = node_3
     node_4 = LinkedList.Node(linked_list, 7)
     node_3.next = node_4
+    node_5 = LinkedList.Node(linked_list, 10)
+    node_4.next = node_5
     print(linked_list)
     print(len(linked_list))
 
