@@ -9,6 +9,21 @@ class LinkedList:
         return f"Head: {self.head} Tail:{self.tail}"
     def __repr__(self):
             return self.__str__()
+    def append(self, node):
+        last = self.tail
+        last.next = node
+        self.tail = node
+    def insert(self, where: int , node):
+        current = self.head
+        if where < self.size:
+            for _ in range(where - 2):
+                current = current.next
+            after = current.next
+            current.next = node
+            node.next = after
+        elif where == self.size:
+            self.append(node)
+        raise ValueError("Too far from last node")
     class Node():
         def __init__(self, linked_list, data):
             self._next = None
@@ -22,7 +37,7 @@ class LinkedList:
             return self._next
         @next.setter
         def next(self, node_a):
-                if self._next == None:
+                if self.next == None:
                     self.linked_list.tail = node_a
                     self._next = node_a
                 else:
@@ -46,6 +61,7 @@ def main()-> None:
     node_3.next = node_4
     node_5 = LinkedList.Node(linked_list, 10)
     node_4.next = node_5
+    linked_list.append(LinkedList.Node(linked_list , 12))
     print(linked_list)
     print(len(linked_list))
 
