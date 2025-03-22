@@ -13,7 +13,17 @@ class LinkedList:
         last = self.tail
         last.next = node
         self.tail = node
-    
+    def insert(self, where: int , node):
+        current = self.head
+        if where < self.size:
+            for _ in range(where - 2):
+                current = current.next
+            after = current.next
+            current.next = node
+            node.next = after
+        elif where == self.size:
+            self.append(node)
+        raise ValueError("Too far from last node")
     class Node():
         def __init__(self, linked_list, data):
             self._next = None
