@@ -6,7 +6,7 @@ class LinkedList:
     def __len__(self):
         return self.size
     def __str__(self):
-        return f"Head: {self.head} Tail:{self.tail}"
+        return f"Head:{self.head} Tail:{self.tail}"
     def __repr__(self):
             return self.__str__()
     def append(self, node):
@@ -39,6 +39,30 @@ class LinkedList:
             self.append(node)
         else:
             raise ValueError("Too far from last node")
+    def delete_node(self, node):
+        current = self.head
+        if current is node and self.head._next != None:
+            self.head = current._next
+            del node
+        else:
+            while current._next != None:
+                if current._next is node and current._next._next != None:
+                    after = current._next
+                    current._next = after._next
+                    print("Deleting node ", node)
+                    del node
+                    self.size -= 1
+                    print("Deleted node")
+                    break
+                elif current._next is node and current._next._next == None:
+                    current._next = None
+                    print("Deleting node", node)
+                    self.size -= 1
+                    del node
+                    print("Deleted node", node)
+                    break
+                current = current._next
+
     def display(self):
         current = self.head
         while current != None:
@@ -71,10 +95,10 @@ class LinkedList:
             return self.__str__()
 def main()-> None:
     linked_list = LinkedList()
-    print(len(linked_list))
+    print(f"Len of linked list is {len(linked_list)}")
     node_1 = LinkedList.Node(linked_list, 2)
     node_2 = LinkedList.Node(linked_list, 4)
-    print(len(linked_list))
+    print(f"Len of linked list is {len(linked_list)}")
     node_3 = LinkedList.Node(linked_list, 5)
     node_1.next = node_2
     node_2.next = node_3
@@ -85,9 +109,13 @@ def main()-> None:
     linked_list.append(LinkedList.Node(linked_list , 12))
     print(linked_list)
     linked_list.display()
-    print(len(linked_list))
+    print(f"Len of linked list is {len(linked_list)}")
     linked_list.insert(5, LinkedList.Node(linked_list, 8))
+    print(f"Len of linked list after insert is {len(linked_list)}")
     linked_list.display()
+    linked_list.delete_node(node_4)
+    linked_list.display()
+    print(f"Len of linked list is after deleting node is {len(linked_list)}")
 
 if __name__ =="__main__":
     main()
