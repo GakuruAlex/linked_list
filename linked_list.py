@@ -10,20 +10,41 @@ class LinkedList:
     def __repr__(self):
             return self.__str__()
     def append(self, node):
+        """_Add node at the end of linked list_
+
+        Args:
+            node (_Node_): _Node to add_
+        """
         last = self.tail
         last.next = node
         self.tail = node
     def insert(self, where: int , node):
+        """_Insert a node in the linked list_
+
+        Args:
+            where (int): _Position in linked list to insert node_
+            node (_Node_): _Node to insert in linked list_
+
+        Raises:
+            ValueError: _If the chain would be broken by inserting in position way off the linked list_
+        """
         current = self.head
-        if where < self.size:
+        if where < len(self):
             for _ in range(where - 2):
-                current = current.next
-            after = current.next
-            current.next = node
-            node.next = after
-        elif where == self.size:
+                current = current._next
+            after = current._next
+            current._next = node
+            node._next = after
+        elif where == len(self):
             self.append(node)
-        raise ValueError("Too far from last node")
+        else:
+            raise ValueError("Too far from last node")
+    def display(self):
+        current = self.head
+        while current != None:
+            print(f"{current} -> ", end="")
+            current = current.next
+        print("None")
     class Node():
         def __init__(self, linked_list, data):
             self._next = None
@@ -63,7 +84,10 @@ def main()-> None:
     node_4.next = node_5
     linked_list.append(LinkedList.Node(linked_list , 12))
     print(linked_list)
+    linked_list.display()
     print(len(linked_list))
+    linked_list.insert(5, LinkedList.Node(linked_list, 8))
+    linked_list.display()
 
 if __name__ =="__main__":
     main()
