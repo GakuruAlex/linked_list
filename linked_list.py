@@ -69,14 +69,14 @@ class LinkedList:
             print(f"{current} -> ", end="")
             current = current.next
         print("None")
-    class Node():
+class Node():
         def __init__(self, linked_list, data):
             self._next = None
             self.linked_list = linked_list
             if linked_list.size == 0:
                 linked_list.head = self
             self.data = data
-            LinkedList.size +=1
+            linked_list.size +=1
         @property
         def next(self):
             return self._next
@@ -96,21 +96,21 @@ class LinkedList:
 def main()-> None:
     linked_list = LinkedList()
     print(f"Len of linked list is {len(linked_list)}")
-    node_1 = LinkedList.Node(linked_list, 2)
-    node_2 = LinkedList.Node(linked_list, 4)
+    node_1 = Node(linked_list, 2)
+    node_2 = Node(linked_list, 4)
     print(f"Len of linked list is {len(linked_list)}")
-    node_3 = LinkedList.Node(linked_list, 5)
+    node_3 = Node(linked_list, 5)
     node_1.next = node_2
     node_2.next = node_3
-    node_4 = LinkedList.Node(linked_list, 7)
+    node_4 = Node(linked_list, 7)
     node_3.next = node_4
-    node_5 = LinkedList.Node(linked_list, 10)
+    node_5 = Node(linked_list, 10)
     node_4.next = node_5
-    linked_list.append(LinkedList.Node(linked_list , 12))
+    linked_list.append(Node(linked_list , 12))
     print(linked_list)
     linked_list.display()
     print(f"Len of linked list is {len(linked_list)}")
-    linked_list.insert(5, LinkedList.Node(linked_list, 8))
+    linked_list.insert(5, Node(linked_list, 8))
     print(f"Len of linked list after insert is {len(linked_list)}")
     linked_list.display()
     linked_list.delete_node(node_4)
