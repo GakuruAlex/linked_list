@@ -17,11 +17,11 @@ class LinkedList:
             node (_Node_): _Node to add_
         """
         if self.head != None:
-            current = self.head
-            while current.next:
-                current = current.next
-            current._next = Node(data)
-            self.tail = current.next
+            start = self.head
+            while start.next:
+                start = start.next
+            start._next = Node(data)
+            self.tail = start.next
         else:
             self.head = Node(data)
             self.tail = self.head
@@ -36,24 +36,39 @@ class LinkedList:
         Raises:
             ValueError: _If the chain would be broken by inserting in position way off the linked list_
         """
-        current = self.head
+        start = self.head
         node = Node(data)
         if where < self.length:
             for _ in range(where - 2):
-                current = current.next
-            after = current.next
-            current._next = node
+                start = start.next
+            after = start.next
+            start._next = node
             node._next = after
             self.length += 1
         elif where == self.length + 1:
             self.append(node)
         else:
             raise ValueError("Too far from last node")
+    def delete_node(self, data, start):
+        if start.data == data and start == self.head:
+            if start.next != None:
+               self.head = start.next
+            del start
+            return
+        if start != self.tail:
+            if start.next.data == data and start.next.next != None:
+                start._next = start.next.next
+                del start
+                return
+        if start == self.tail:
+            print(f"Node with {data} not found")
+            return
+        self.delete_node(data= data, start= start.next)
 
     def display(self):
-        current = self.head
-        while current != None:
-            print(f"{current} -> ", end="")
-            current = current.next
+        start = self.head
+        while start != None:
+            print(f"{start} -> ", end="")
+            start = start.next
         print("None")
 
