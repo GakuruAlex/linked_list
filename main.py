@@ -16,6 +16,9 @@ def main()-> None:
     # print(f"Len of linked list is after deleting node is {len(linked_list)}")
     linked_list.insert(2, 24)
     linked_list.display()
+    linked_list.delete_node(start= linked_list.head, data=24)
+    linked_list.display()
+    linked_list.delete_node(start= linked_list.head, data= 24)
 
 if __name__ =="__main__":
     main()
