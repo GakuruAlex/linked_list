@@ -60,16 +60,30 @@ class LinkedList:
             if start.next != None:
                self.head = start.next
             del start
+            self.length += 1
             return
         if start != self.tail:
             if start.next.data == data and start.next.next != None:
                 start._next = start.next.next
                 del start
+                self.length += 1
                 return
         if start == self.tail:
             print(f"Node with {data} not found")
             return
         self.delete_node(data= data, start= start.next)
+    def get_at(self, index: int)-> None:
+        current: Node = self.head
+        if index == self.length:
+            return self.tail
+        elif index == 1:
+            return current
+        elif index > self.length:
+            raise ValueError("Index out of range")
+        else:
+            for i in range(1, index):
+                current = current.next
+        return current
 
     def display(self):
         start = self.head
