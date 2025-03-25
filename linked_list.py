@@ -60,13 +60,13 @@ class LinkedList:
             if start.next != None:
                self.head = start.next
             del start
-            self.length += 1
+            self.length -= 1
             return
         if start != self.tail:
             if start.next.data == data and start.next.next != None:
                 start._next = start.next.next
                 del start
-                self.length += 1
+                self.length -= 1
                 return
         if start == self.tail:
             print(f"Node with {data} not found")
